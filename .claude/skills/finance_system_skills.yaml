@@ -1,0 +1,115 @@
+# FINANCE SKILLS
+skills:
+  - name: Parse_Bank_Transaction_Skill
+    category: finance
+    description: Extracts structured data from transaction logs
+    inputs:
+      - raw_transaction_entry
+    outputs:
+      - date
+      - merchant
+      - amount
+      - type
+    flags:
+      - detect_large_amount
+      - detect_repeated_pattern
+    permissions:
+      - read_only
+    safety:
+      - prevent parsing sensitive account details
+      - ensure data privacy compliance
+
+  - name: Categorize_Expense_Skill
+    category: finance
+    description: Classifies expenses into business categories
+    inputs:
+      - transaction_description
+      - amount
+      - merchant
+    outputs:
+      - expense_category
+      - business_justification
+    permissions:
+      - read_only
+    safety:
+      - prevent misclassification of personal expenses
+      - ensure tax compliance
+
+  - name: Detect_Subscription_Skill
+    category: finance
+    description: Identifies recurring subscription payments
+    inputs:
+      - transaction_history
+      - merchant_name
+    outputs:
+      - is_subscription
+      - billing_frequency
+      - next_due_date
+    permissions:
+      - read_only
+    safety:
+      - prevent false positives on one-time payments
+      - respect billing privacy
+
+  - name: Generate_Invoice_Skill
+    category: finance
+    description: Creates invoice document from transaction data
+    inputs:
+      - client_info
+      - service_description
+      - amount
+      - due_date
+    outputs:
+      - invoice_file_path
+      - invoice_number
+    permissions:
+      - write_only
+    safety:
+      - prevent duplicate invoice generation
+      - ensure accurate tax calculations
+
+  - name: Create_Payment_Draft_Skill
+    category: finance
+    description: Prepares payment file for approval
+    inputs:
+      - recipient_details
+      - amount
+      - payment_reason
+    outputs:
+      - payment_draft_path
+      - approval_required
+    permissions:
+      - write_only
+    safety:
+      - prevent unauthorized payments
+      - require multi-level approval for large amounts
+
+  - name: Odoo_Sync_Skill
+    category: finance
+    description: Synchronizes financial data with Odoo ERP
+    inputs:
+      - transaction_data
+      - sync_type
+    outputs:
+      - sync_status
+      - error_log
+    permissions:
+      - read_write
+    safety:
+      - ensure data consistency
+      - prevent unauthorized ERP access
+
+  - name: Revenue_Trend_Analysis_Skill
+    category: finance
+    description: Analyzes revenue patterns and forecasts
+    inputs:
+      - historical_revenue_data
+      - time_period
+    outputs:
+      - trend_analysis
+      - forecast_prediction
+    permissions:
+      - read_only
+    safety:
+      - protect sensitive financial data
+      - ensure accuracy of projections

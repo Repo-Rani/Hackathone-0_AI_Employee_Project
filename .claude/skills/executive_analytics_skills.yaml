@@ -1,0 +1,49 @@
+# EXECUTIVE & ANALYTICS SKILLS
+skills:
+  - name: Generate_CEO_Brief_Skill
+    category: executive
+    description: Generates weekly executive summary report
+    inputs:
+      - completed_tasks
+      - revenue_summary
+      - cost_summary
+    outputs:
+      - ceo_brief_md
+    format: markdown
+    permissions:
+      - read_write
+    safety:
+      - prevent exposing confidential data
+      - ensure appropriate access controls
+
+  - name: Bottleneck_Detection_Skill
+    category: analytics
+    description: Identifies operational bottlenecks in processes
+    inputs:
+      - process_logs
+      - timeline_data
+      - resource_utilization
+    outputs:
+      - bottleneck_report
+      - severity_score
+    permissions:
+      - read_only
+    safety:
+      - maintain data privacy during analysis
+      - focus on process not personnel issues
+
+  - name: Cost_Optimization_Skill
+    category: analytics
+    description: Analyzes spending patterns and suggests optimizations
+    inputs:
+      - expense_data
+      - resource_allocation
+      - budget_limits
+    outputs:
+      - optimization_report
+      - cost_savings_estimate
+    permissions:
+      - read_only
+    safety:
+      - protect sensitive financial information
+      - ensure recommendations are realistic and actionable

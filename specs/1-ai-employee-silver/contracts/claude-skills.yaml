@@ -1,0 +1,326 @@
+# Claude Skills API Contract
+# For Silver Tier Personal AI Employee
+
+openapi: 3.0.0
+info:
+  title: Claude Agent Skills for AI Employee
+  description: API contract for Claude agent skills used in the Personal AI Employee system
+  version: 1.0.0
+
+paths:
+  /skills/email-triage:
+    post:
+      summary: Process incoming email files for triage
+      description: Analyze EMAIL_*.md files and create structured action plans
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filePath:
+                  type: string
+                  description: Path to the EMAIL_*.md file
+                content:
+                  type: string
+                  description: Content of the email file
+      responses:
+        '200':
+          description: Plan file created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  planFile:
+                    type: string
+                    description: Path to created PLAN_EMAIL_*.md file
+                  requiresApproval:
+                    type: boolean
+                    description: Whether action requires human approval
+                  error:
+                    type: string
+                    description: Error message if processing failed
+
+  /skills/whatsapp-handler:
+    post:
+      summary: Process incoming WhatsApp files
+      description: Analyze WA_*.md files and create structured action plans
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filePath:
+                  type: string
+                  description: Path to the WA_*.md file
+                content:
+                  type: string
+                  description: Content of the WhatsApp file
+      responses:
+        '200':
+          description: Plan file created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  planFile:
+                    type: string
+                    description: Path to created PLAN_WA_*.md file
+                  requiresApproval:
+                    type: boolean
+                    description: Whether action requires human approval
+                  error:
+                    type: string
+                    description: Error message if processing failed
+
+  /skills/plan-generator:
+    post:
+      summary: Generate action plan for any input file
+      description: Create structured PLAN_*.md file for any /Needs_Action/ file
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filePath:
+                  type: string
+                  description: Path to the input file
+                fileType:
+                  type: string
+                  enum: [email, whatsapp, file_drop]
+                content:
+                  type: string
+                  description: Content of the input file
+      responses:
+        '200':
+          description: Plan file created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  planFile:
+                    type: string
+                    description: Path to created PLAN_*.md file
+                  requiresApproval:
+                    type: boolean
+                    description: Whether action requires human approval
+                  error:
+                    type: string
+                    description: Error message if processing failed
+
+  /skills/linkedin-poster:
+    post:
+      summary: Generate LinkedIn post from business activity
+      description: Create a professional LinkedIn post based on business activity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                businessGoals:
+                  type: string
+                  description: Current business goals and metrics
+                recentActivity:
+                  type: string
+                  description: Recent completed tasks and achievements
+                topic:
+                  type: string
+                  description: Post topic or theme
+      responses:
+        '200':
+          description: LinkedIn post created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  postFile:
+                    type: string
+                    description: Path to created POST_*.md file
+                  scheduledTime:
+                    type: string
+                    format: date-time
+                    description: When the post is scheduled to publish
+                  error:
+                    type: string
+                    description: Error message if post generation failed
+
+  /skills/hitl-manager:
+    post:
+      summary: Manage Human-in-the-Loop approval requests
+      description: Create approval request files for sensitive actions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                actionDetails:
+                  type: object
+                  description: Details of the action requiring approval
+                  properties:
+                    action:
+                      type: string
+                      enum: [send_email, linkedin_post, payment]
+                    target:
+                      type: string
+                      description: Target of the action (email, etc.)
+                    subject:
+                      type: string
+                      description: Subject or title of action
+                    sourcePlan:
+                      type: string
+                      description: Reference to source plan file
+                    context:
+                      type: string
+                      description: Context for the approval request
+      responses:
+        '200':
+          description: Approval request created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  approvalFile:
+                    type: string
+                    description: Path to created approval request file
+                  error:
+                    type: string
+                    description: Error message if approval request failed
+
+  /skills/dashboard-updater:
+    post:
+      summary: Update the dashboard with latest activity
+      description: Update Dashboard.md with recent activity and metrics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activity:
+                  type: array
+                  items:
+                    type: string
+                    description: Recent activity entry
+                metrics:
+                  type: object
+                  description: Business metrics and statistics
+                  properties:
+                    pendingApprovals:
+                      type: number
+                      description: Count of pending approvals
+                    revenueMTD:
+                      type: number
+                      description: Monthly to date revenue
+                    activeProjects:
+                      type: number
+                      description: Count of active projects
+                alerts:
+                  type: array
+                  items:
+                    type: string
+                    description: Alert message
+      responses:
+        '200':
+          description: Dashboard updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dashboardPath:
+                    type: string
+                    description: Path to updated Dashboard.md
+                  error:
+                    type: string
+                    description: Error message if update failed
+
+components:
+  schemas:
+    EmailFile:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [email]
+        from:
+          type: string
+        subject:
+          type: string
+        email_date:
+          type: string
+          format: date-time
+        received:
+          type: string
+          format: date-time
+        priority:
+          type: string
+          enum: [high, medium, low]
+        status:
+          type: string
+          enum: [pending, processing, done]
+        msg_id:
+          type: string
+        content:
+          type: string
+
+    WhatsAppFile:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [whatsapp]
+        received:
+          type: string
+          format: date-time
+        priority:
+          type: string
+          enum: [high, medium, low]
+        status:
+          type: string
+          enum: [pending, processing, done]
+        keywords_matched:
+          type: array
+          items:
+            type: string
+        content:
+          type: string
+
+    PlanFile:
+      type: object
+      properties:
+        created:
+          type: string
+          format: date-time
+        source_file:
+          type: string
+        status:
+          type: string
+          enum: [pending_approval, pending_execution, completed]
+        priority:
+          type: string
+          enum: [high, medium, low]
+        processed:
+          type: boolean
+        objective:
+          type: string
+        analysis:
+          type: string
+        action_steps:
+          type: array
+          items:
+            type: string

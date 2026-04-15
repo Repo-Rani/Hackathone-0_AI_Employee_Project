@@ -1,0 +1,78 @@
+# INFRASTRUCTURE SKILLS
+skills:
+  - name: Trigger_Claude_Process_Skill
+    category: infrastructure
+    description: Initiates a Claude process or workflow
+    inputs:
+      - process_name
+      - parameters
+    outputs:
+      - process_id
+      - execution_status
+    permissions:
+      - execute_only
+    safety:
+      - prevent unauthorized process execution
+      - validate process parameters
+
+  - name: Schedule_Task_Skill
+    category: infrastructure
+    description: Schedules a task for future execution
+    inputs:
+      - task_details
+      - execution_time
+      - recurrence_pattern
+    outputs:
+      - schedule_id
+      - confirmation
+    permissions:
+      - write_only
+    safety:
+      - prevent scheduling conflicting tasks
+      - validate execution time parameters
+
+  - name: Log_Event_Skill
+    category: infrastructure
+    description: Records system events and logs
+    inputs:
+      - event_type
+      - event_data
+      - severity_level
+    outputs:
+      - log_entry_id
+      - timestamp
+    permissions:
+      - write_only
+    safety:
+      - prevent logging sensitive information
+      - maintain log integrity
+
+  - name: Restart_Watcher_Skill
+    category: infrastructure
+    description: Restarts monitoring or watcher processes
+    inputs:
+      - watcher_name
+      - restart_reason
+    outputs:
+      - restart_status
+      - new_process_id
+    permissions:
+      - execute_only
+    safety:
+      - prevent unauthorized restarts
+      - ensure graceful shutdown of existing processes
+
+  - name: Conflict_Resolution_Skill
+    category: infrastructure
+    description: Resolves conflicts between concurrent processes
+    inputs:
+      - conflict_details
+      - impacted_resources
+    outputs:
+      - resolution_strategy
+      - resolved_status
+    permissions:
+      - read_write
+    safety:
+      - prevent data corruption during resolution
+      - maintain system consistency

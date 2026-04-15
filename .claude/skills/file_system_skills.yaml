@@ -1,0 +1,82 @@
+# FILE SYSTEM SKILLS
+skills:
+  - name: Read_File_Skill
+    category: filesystem
+    description: Reads markdown or text files from vault
+    inputs:
+      - file_path
+    outputs:
+      - file_content
+    permissions:
+      - read_only
+    safety:
+      - prevent reading .env
+      - prevent reading secrets folder
+
+  - name: Write_File_Skill
+    category: filesystem
+    description: Writes content to a markdown or text file in vault
+    inputs:
+      - file_path
+      - file_content
+    outputs:
+      - success_status
+    permissions:
+      - write_only
+    safety:
+      - prevent writing to .env
+      - prevent writing to secrets folder
+
+  - name: Move_File_Skill
+    category: filesystem
+    description: Moves files from source to destination in vault
+    inputs:
+      - source_path
+      - destination_path
+    outputs:
+      - success_status
+    permissions:
+      - write_only
+    safety:
+      - prevent moving .env files
+      - prevent moving secrets folder
+
+  - name: Create_File_Skill
+    category: filesystem
+    description: Creates a new markdown or text file in vault
+    inputs:
+      - file_path
+      - file_content
+    outputs:
+      - success_status
+    permissions:
+      - write_only
+    safety:
+      - prevent creating .env files
+      - prevent creating files in secrets folder
+
+  - name: Delete_File_Skill
+    category: filesystem
+    description: Deletes a file from vault
+    inputs:
+      - file_path
+    outputs:
+      - success_status
+    permissions:
+      - delete_only
+    safety:
+      - prevent deleting .env files
+      - prevent deleting from secrets folder
+
+  - name: List_Directory_Skill
+    category: filesystem
+    description: Lists files and directories in a specified path
+    inputs:
+      - directory_path
+    outputs:
+      - directory_contents
+    permissions:
+      - read_only
+    safety:
+      - prevent listing .env directory
+      - prevent listing secrets folder

@@ -1,0 +1,28 @@
+# Gold Tier Personal AI Employee - Python Dependencies
+# Install with: pip install -r requirements_gold.txt --break-system-packages
+
+# ── Silver Tier (retained) ────────────────────────────────────────
+google-auth==2.23.0
+google-auth-oauthlib==1.1.0
+google-auth-httplib2==0.1.1
+google-api-python-client==2.105.0
+playwright==1.40.0
+watchdog==3.0.0
+python-dotenv==1.0.0
+requests==2.31.0
+
+# ── Gold Tier (new) ───────────────────────────────────────────────
+# Twitter/X API
+tweepy==4.14.0
+
+# Instagram Business (instagrapi)
+instagrapi==2.1.0
+
+# Date utilities for CEO briefing
+python-dateutil==2.8.2
+
+# ── Optional: Facebook (requests already included) ─────────────────
+# Facebook uses requests library for Graph API calls (already installed)
+
+# ── Post-install ──────────────────────────────────────────────────
+# After installing, run: playwright install chromium

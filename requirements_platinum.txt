@@ -1,0 +1,21 @@
+# Platinum Tier AI Employee Requirements
+
+# Core dependencies
+python-dotenv>=1.0.0
+requests>=2.31.0
+xmlrpc>=1.0.1
+
+# For watchers and automation
+watchdog>=4.0.0
+playwright>=1.40.0
+google-api-python-client>=2.110.0
+
+# For vault sync
+GitPython>=3.1.40
+
+# For process management (via PM2, but some Python utilities might be helpful)
+psutil>=5.9.5
+
+# For testing and development
+pytest>=7.4.0
+pytest-asyncio>=0.23.0

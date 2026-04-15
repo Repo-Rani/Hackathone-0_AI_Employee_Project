@@ -1,0 +1,41 @@
+# APPROVAL SYSTEM SKILLS
+skills:
+  - name: Generate_Approval_File_Skill
+    category: governance
+    description: Creates approval request file in Approval_Pending folder
+    inputs:
+      - action_summary
+      - risk_level
+    outputs:
+      - approval_file_path
+    requires_human_confirmation: true
+    permissions:
+      - write_only
+    safety:
+      - prevent creating approval files in unauthorized directories
+
+  - name: Detect_Approval_Status_Skill
+    category: governance
+    description: Checks the status of approval files in the system
+    inputs:
+      - approval_file_path
+    outputs:
+      - approval_status
+    permissions:
+      - read_only
+    safety:
+      - prevent accessing unauthorized approval files
+
+  - name: Execute_After_Approval_Skill
+    category: governance
+    description: Executes an action only after approval has been granted
+    inputs:
+      - action_to_execute
+      - approval_file_path
+    outputs:
+      - execution_result
+    permissions:
+      - execute_only
+    safety:
+      - prevent execution without valid approval
+      - validate approval signature before execution

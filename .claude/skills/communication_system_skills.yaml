@@ -1,0 +1,88 @@
+# COMMUNICATION SKILLS
+skills:
+  - name: Gmail_Read_Skill
+    category: communication
+    description: Reads emails from specified Gmail account
+    inputs:
+      - folder
+      - filters
+    outputs:
+      - email_list
+    permissions:
+      - read_only
+    safety:
+      - prevent reading unauthorized accounts
+      - respect privacy of sensitive emails
+
+  - name: Gmail_Draft_Skill
+    category: communication
+    description: Creates draft email response
+    inputs:
+      - recipient
+      - subject
+      - body
+    outputs:
+      - draft_id
+    permissions:
+      - write_only
+    safety:
+      - never_auto_send
+      - prevent sending to unauthorized recipients
+
+  - name: Gmail_Send_Skill
+    category: communication
+    description: Sends email draft from Gmail account
+    inputs:
+      - draft_id
+      - send_time
+    outputs:
+      - send_status
+    permissions:
+      - send_only
+    safety:
+      - require confirmation before sending
+      - prevent mass unsolicited emails
+
+  - name: WhatsApp_Read_Skill
+    category: communication
+    description: Reads messages from WhatsApp Business account
+    inputs:
+      - contact_number
+      - time_range
+    outputs:
+      - message_history
+    permissions:
+      - read_only
+    safety:
+      - prevent reading unauthorized accounts
+      - maintain message privacy
+
+  - name: Social_Post_Draft_Skill
+    category: communication
+    description: Creates draft social media posts
+    inputs:
+      - platform
+      - content
+      - hashtags
+    outputs:
+      - draft_post_id
+    permissions:
+      - write_only
+    safety:
+      - require approval before publishing
+      - prevent inappropriate content
+
+  - name: Sensitive_Message_Flag_Skill
+    category: communication
+    description: Identifies and flags sensitive content in messages
+    inputs:
+      - message_content
+      - message_type
+    outputs:
+      - flag_status
+      - sensitivity_level
+    permissions:
+      - read_only
+    safety:
+      - maintain message privacy during analysis
+      - prevent false positives on normal content
